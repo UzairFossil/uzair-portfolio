@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+<html class="dark scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0f172a",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-variant": "#2d3449",
+                        "secondary": "#bcc7de",
+                        "surface-bright": "#31394d",
+                        "primary": "#bec6e0",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-primary-container": "#798098",
+                        "outline": "#909097",
+                        "on-secondary-container": "#aeb9d0",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2d3449",
+                        "primary-fixed": "#dae2fd",
+                        "on-surface-variant": "#c6c6cd",
+                        "inverse-surface": "#dae2fd",
+                        "surface-container-lowest": "#060e20",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#003824",
+                        "background": "#0b1326",
+                        "surface-dim": "#0b1326",
+                        "surface-container-high": "#222a3d",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "secondary-fixed": "#d8e3fb",
+                        "surface-container-low": "#131b2e",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-secondary": "#263143",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary-container": "#3e495d",
+                        "on-background": "#dae2fd",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary": "#283044",
+                        "tertiary": "#4edea3",
+                        "inverse-primary": "#565e74",
+                        "on-surface": "#dae2fd",
+                        "on-tertiary-container": "#009365",
+                        "surface": "#0b1326",
+                        "surface-container": "#171f33",
+                        "primary-fixed-dim": "#bec6e0",
+                        "outline-variant": "#45464d",
+                        "inverse-on-surface": "#283044",
+                        "tertiary-container": "#001c10",
+                        "surface-tint": "#bec6e0",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .active {
+            color: #4edea3 !important;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #0b1326;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .project-card-hover {
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @media screen and (min-width:767px) {
+            .project-card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 0 60px rgba(78, 222, 163, 0.12);
+
+            }
+        }
+
+
+
+        .project-card-hover:hover img {
+            transform: scale(1.05);
+        }
+
+        .img-container img {
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+    </style>
+</head>
+
+<body class="font-body selection:bg-tertiary/30 selection:text-tertiary">
+    <!-- TopNavBar -->
+    <!-- text-[#bec6e0] -->
+    <nav class="fixed top-0 w-full z-50 bg-[#2d3449]/60 backdrop-blur-xl shadow-[0_12px_40px_rgba(6,14,32,0.4)]">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <span class="text-xl font-bold tracking-tighter text-[#4edea3] font-headline">Uzair Faisal</span>
+            <div class="hidden md:flex gap-8 items-center">
+                <a class="nav-link font-bold font-headline tracking-tight pb-1
+text-[#bec6e0] border-b-2 border-transparent
+
+transition-all duration-300 ease-out
+
+hover:text-[#4edea3]
+hover:border-[#4edea3]
+hover:scale-[1.08]" href="#skills">Skills</a>
+                <a class="nav-link font-bold font-headline tracking-tight pb-1
+text-[#bec6e0] border-b-2 border-transparent
+
+transition-all duration-300 ease-out
+
+hover:text-[#4edea3]
+hover:border-[#4edea3]
+hover:scale-[1.08]" href="#work">Work</a>
+
+                <a class="nav-link font-bold font-headline tracking-tight pb-1
+text-[#bec6e0] border-b-2 border-transparent
+
+transition-all duration-300 ease-out
+
+hover:text-[#4edea3]
+hover:border-[#4edea3]
+hover:scale-[1.08]" href="#reviews">Reviews</a>
+                <a class="nav-link font-bold font-headline tracking-tight pb-1
+text-[#bec6e0] border-b-2 border-transparent
+
+transition-all duration-300 ease-out
+
+hover:text-[#4edea3]
+hover:border-[#4edea3]
+hover:scale-[1.08]" href="#contact">Contact</a>
+            </div>
+            <button
+                class="bg-tertiary text-on-tertiary px-6 py-2 rounded-md font-bold hover:scale-105 active:scale-95 transition-all duration-200">
+                <a href="https://www.upwork.com/freelancers/~01f015ec06b571edd3">Hire
+                    Me</a></button>
+        </div>
+    </nav>
+    <main>
+        <!-- Hero Section -->
+        <section
+            class="min-h-screen flex flex-col justify-center items-center px-8 text-center pt-[160px] pb-20 lg:pb-0 lg:pt-20 overflow-hidden">
+            <div class="max-w-4xl space-y-8" id="hero-content">
+                <h1
+                    class="text-6xl md:text-8xl font-headline font-extrabold tracking-tighter text-on-surface reveal-up leading-[1.2]">
+                    Hello My Name Is <span class="text-tertiary">Uzair</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-primary max-w-2xl mx-auto leading-relaxed font-light reveal-up">
+                    I am a WordPress developer specializing in using block themes to create high performing websites
+                </p>
+                <div class="pt-10 reveal-up">
+                    <a class="group inline-flex items-center gap-3 bg-tertiary text-on-tertiary px-10 py-4 rounded-md font-bold text-lg hover:scale-105 transition-all duration-200"
+                        href="#work">
+                        View Work
+                        <span
+                            class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Technical Arsenal -->
+        <section class="py-16 lg:py-32 px-8 bg-surface-container-low" id="skills">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-12 lg:mb-20 reveal-up section-header">
+                    <span class="text-tertiary font-label text-xs tracking-[0.2em] uppercase font-bold">Technical
+                        Arsenal</span>
+                    <h2 class="text-4xl md:text-5xl font-headline font-bold mt-4 tracking-tight leading-[1.4]">My
+                        WordPress Skills
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="skills-grid">
+                    <!-- WordPress & Elementor -->
+                    <div
+                        class="skill-card bg-surface-container p-10 rounded-xl space-y-6 reveal-scale hover:shadow-[0_0_30px_rgba(78,222,163,0.05)] transition-shadow duration-300">
+                        <div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center rounded-lg">
+                            <span class="material-symbols-outlined text-tertiary" data-icon="web">web</span>
+                        </div>
+                        <h3 class="text-2xl font-headline font-bold">Block themes</h3>
+                        <p class="text-on-primary-container leading-relaxed">I can build modern, responsive websites
+                            using block themes and Gutenberg.</p>
+                    </div>
+                    <!-- PHP Mastery -->
+                    <div
+                        class="skill-card bg-surface-container p-10 rounded-xl space-y-6 reveal-scale hover:shadow-[0_0_30px_rgba(78,222,163,0.05)] transition-shadow duration-300">
+                        <div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center rounded-lg">
+                            <span class="material-symbols-outlined text-tertiary" data-icon="code">code</span>
+                        </div>
+                        <h3 class="text-2xl font-headline font-bold">PHP & WordPress Hooks</h3>
+                        <p class="text-on-primary-container leading-relaxed">Writing custom snippets, modifying plugin
+                            behavior, and extending functionality safely.</p>
+                    </div>
+                    <!-- WooCommerce -->
+                    <div
+                        class="skill-card bg-surface-container p-10 rounded-xl space-y-6 reveal-scale hover:shadow-[0_0_30px_rgba(78,222,163,0.05)] transition-shadow duration-300">
+                        <div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center rounded-lg">
+                            <span class="material-symbols-outlined text-tertiary"
+                                data-icon="shopping_cart">shopping_cart</span>
+                        </div>
+                        <h3 class="text-2xl font-headline font-bold">WooCommerce Setup & Fixes</h3>
+                        <p class="text-on-primary-container leading-relaxed">Product setup, checkout improvements, and
+                            resolving common store issues.</p>
+                    </div>
+                    <!-- Technical SEO -->
+                    <div
+                        class="skill-card bg-surface-container p-10 rounded-xl space-y-6 md:col-span-1 reveal-scale hover:shadow-[0_0_30px_rgba(78,222,163,0.05)] transition-shadow duration-300">
+                        <div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center rounded-lg">
+                            <span class="material-symbols-outlined text-tertiary" data-icon="speed">speed</span>
+                        </div>
+                        <h3 class="text-2xl font-headline font-bold">Speed Optimization</h3>
+                        <p class="text-on-primary-container leading-relaxed">Improving load times with image
+                            optimization, caching, and clean code practices.</p>
+                    </div>
+                    <!-- Custom Logic -->
+                    <div
+                        class="skill-card bg-surface-container p-10 rounded-xl space-y-6 md:col-span-2 reveal-scale hover:shadow-[0_0_30px_rgba(78,222,163,0.05)] transition-shadow duration-300">
+                        <div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center rounded-lg">
+                            <span class="material-symbols-outlined text-tertiary"
+                                data-icon="settings_input_component">settings_input_component</span>
+                        </div>
+                        <h3 class="text-2xl font-headline font-bold">WordPress Customization</h3>
+                        <p class="text-on-primary-container leading-relaxed">Tailoring themes, plugins, and layouts to
+                            match business needs, including small custom code where needed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Featured Artifacts -->
+        <section class="py-16 lg:py-32 px-8" id="work">
+            <div class="max-w-7xl mx-auto space-y-16 lg:space-y-32 lg:space-y-16 lg:space-y-32">
+                <div class="text-center reveal-up">
+                    <span class="text-tertiary font-label text-xs tracking-[0.2em] uppercase font-bold">Portfolio</span>
+                    <h2 class="text-4xl md:text-6xl font-headline font-bold mt-4 tracking-tighter">Featured Projects
+                    </h2>
+                </div>
+                <!-- Project 1 -->
+                <div
+                    class="project-item grid grid-cols-1 lg:grid-cols-2 gap-9 items-center reveal-up min-h-[375px] rounded-xl ">
+
+
+
+
+                    <div
+                        class="lg:order-2 img-container overflow-hidden bg-surface-container aspect-video shadow-2xl h-full max-w-full rounded-xl">
+                        <img alt="Vanguard Corporate" class="w-full h-full object-cover object-[45%_20%]"
+                            data-alt="Minimalist architectural office interior with large windows and sharp shadows, reflecting corporate precision and professional design aesthetic"
+                            src="assets//todomore.png" />
+                    </div>
+                    <div class="lg:order-1 space-y-6 md:pl-16 pl-0 text-center lg:text-left">
+                        <span class="text-tertiary font-label text-xs tracking-[0.1em] uppercase">95+ performance
+                            score</span>
+                        <h3 class="text-4xl font-headline font-bold text-on-surface leading-[1.3]">High-Performance Home
+                            Services Website</h3>
+                        <p class="text-lg text-primary leading-relaxed">Fast-loading website with 90+ performance scores
+                            on mobile and desktop and having a multi step form.</p>
+                        <a class="text-sm flex items-center gap-1 pt-2 transition-colors bg-tertiary text-on-tertiary font-bold max-w-max px-4 py-2 rounded-md hover:bg-tertiary/90 justify-self-center lg:justify-self-start"
+                            href="https://todomorehomeservices.com/">View Site <span
+                                class="material-symbols-outlined text-xs" data-icon="open_in_new">open_in_new</span></a>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div
+                    class="project-item grid grid-cols-1 lg:grid-cols-2 gap-9 items-center reveal-up min-h-[375px] rounded-xl">
+                    <div
+                        class="img-container rounded-xl  bg-surface-container aspect-video h-full max-w-full overflow-hidden">
+                        <img alt="Nexus Dashboard" class="w-full h-full object-cover rounded-xl"
+                            data-alt="Modern sleek SaaS dashboard interface with complex data visualizations in dark mode with emerald green accents and clean typography"
+                            src="/assets/34a.png" />
+                    </div>
+                    <div class="space-y-6 md:pr-16 pr-0 text-center lg:text-left">
+                        <span class="text-tertiary font-label text-xs tracking-[0.1em] uppercase">10 Page Website</span>
+                        <h3 class="text-4xl font-headline font-bold text-on-surface leading-[1.3]">Elementor to
+                            Gutenberg Conversion
+                        </h3>
+                        <p class="text-lg text-primary leading-relaxed">Rebuilt an existing Elementor website using
+                            Gutenberg and block themes with a 1:1 layout match. I also used PHP snippets to reduce
+                            the amount of plugins to minimum</p>
+                        <a class="text-sm flex items-center gap-1 pt-2 transition-colors bg-tertiary text-on-tertiary font-bold max-w-max px-4 py-2 rounded-md hover:bg-tertiary/90 justify-self-center lg:justify-self-start"
+                            href="https://xn--34a-prfung-feb.de/">View Site <span
+                                class="material-symbols-outlined text-xs" data-icon="open_in_new">open_in_new</span></a>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div
+                    class="project-item grid grid-cols-1 lg:grid-cols-2 gap-9 items-center reveal-up min-h-[375px] rounded-xl">
+                    <div
+                        class="img-container overflow-hidden bg-surface-container aspect-video shadow-2xl h-full max-w-full rounded-xl">
+                        <img alt="Insight Analytics" class="w-full h-full object-cover rounded-xl"
+                            data-alt="Abstract digital network visualization with glowing lines and nodes in shades of deep blue and emerald green representing data flow"
+                            src="assets/thix-main.png" />
+                    </div>
+                    <div class="space-y-6 lg:pr-16 text-center lg:text-left">
+                        <span class="text-tertiary font-label text-xs tracking-[0.1em] uppercase">Woocommerce
+                            Store</span>
+                        <h3 class="text-4xl font-headline font-bold text-on-surface leading-[1.3]">Custom WooCommerce
+                            Store for Bag
+                            Brand</h3>
+                        <p class="text-lg text-primary leading-relaxed">A WooCommerce store made with
+                            Elementor, focusing on clean product presentation and smooth user flow using PHP and JS
+                            where needed.</p>
+                        <a class="text-sm flex items-center gap-1 pt-2 transition-colors bg-tertiary text-on-tertiary font-bold max-w-max px-4 py-2 rounded-md hover:bg-tertiary/90 justify-self-center lg:justify-self-start"
+                            href="https://thix.site/">View Site <span class="material-symbols-outlined text-xs"
+                                data-icon="open_in_new">open_in_new</span></a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Project Archive -->
+        <section class="py-16 lg:py-24 px-8 bg-surface-container-lowest overflow-hidden">
+            <div class="max-w-7xl mx-auto">
+                <h3 class="text-2xl font-headline font-bold mb-12 flex items-center gap-3 reveal-up leading-[1.4]">
+                    <span class="material-symbols-outlined text-tertiary" data-icon="folder_open">folder_open</span>
+                    Other WordPress Projects
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-6" id="archive-grid">
+                    <!-- Archive Item 1 -->
+                    <div
+                        class="archive-card bg-surface-container rounded-lg border border-transparent border-outline-variant/10 hover:border-tertiary/30 transition-all duration-300 reveal-scale">
+                        <img src="assets/olympics.png" class="w-full h-[160px]" />
+                        <div class="p-6 space-y-4">
+                            <h4 class="font-headline font-bold text-lg">Olympia Diagnostics</h4>
+                            <p class="text-on-primary-container text-sm">WooCommerce based elementor site for selling
+                                medical equipment.</p>
+
+                            <a class="text-sm text-secondary hover:text-tertiary flex items-center gap-1 pt-2 transition-colors"
+                                href="https://olympiadiagnostics.com.pk/">View Site <span
+                                    class="material-symbols-outlined text-xs"
+                                    data-icon="open_in_new">open_in_new</span></a>
+                        </div>
+                    </div>
+                    <!-- Archive Item 2 -->
+                    <div
+                        class="archive-card bg-surface-container rounded-lg border border-outline-variant/10 hover:border-tertiary/30 transition-all duration-300 reveal-scale">
+                        <img src="assets/abc.png" class="w-full h-[160px]" />
+                        <div class="p-6 space-y-4">
+
+                            <h4 class="font-headline font-bold text-lg">Impatience Earth</h4>
+                            <p class="text-on-primary-container text-sm">Pixel perfect design implementation for a
+                                climate change organization.</p>
+
+                            <a class="text-sm text-secondary hover:text-tertiary flex items-center gap-1 pt-2 transition-colors"
+                                href="https://impatient.earth/">View Site <span
+                                    class="material-symbols-outlined text-xs"
+                                    data-icon="open_in_new">open_in_new</span></a>
+                        </div>
+                    </div>
+                    <!-- Archive Item 3 -->
+                    <div
+                        class="archive-card bg-surface-container rounded-lg border border-outline-variant/10 hover:border-tertiary/30 transition-all duration-300 reveal-scale">
+                        <img src="assets/sesk-main.png" class="w-full h-[160px] " />
+                        <div class="p-6 space-y-4">
+
+                            <h4 class="font-headline font-bold text-lg">SESK Design</h4>
+                            <p class="text-on-primary-container text-sm">Elementor multi page site focusing heavily on
+                                animations and transitions.</p>
+
+                            <a class="text-sm text-secondary hover:text-tertiary flex items-center gap-1 pt-2 transition-colors"
+                                href="https://seskdesign.com/">View Site <span class="material-symbols-outlined text-xs"
+                                    data-icon="open_in_new">open_in_new</span></a>
+                        </div>
+                    </div>
+                    <!-- Archive Item 4 -->
+                    <div
+                        class="archive-card bg-surface-container rounded-lg border border-outline-variant/10 hover:border-tertiary/30 transition-all duration-300 reveal-scale">
+                        <img src="assets/shoot.png" class="w-full h-[160px] object-cover" />
+                        <div class="p-6 space-y-4">
+
+                            <h4 class="font-headline font-bold text-lg">Shooter Dynamics</h4>
+                            <p class="text-on-primary-container text-sm">WordPress course website made with default
+                                block theme, CSS and JS.</p>
+
+                            <a class="text-sm text-secondary hover:text-tertiary flex items-center gap-1 pt-2 transition-colors"
+                                href="https://shooterdynamics.de/">View Site <span
+                                    class="material-symbols-outlined text-xs"
+                                    data-icon="open_in_new">open_in_new</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Client Echoes -->
+        <section class="py-16 lg:py-32 px-8 overflow-hidden" id="reviews">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 lg:mb-20 reveal-up section-header">
+                    <span
+                        class="text-tertiary font-label text-xs tracking-[0.2em] uppercase font-bold">Testimonials</span>
+                    <h2 class="text-4xl font-headline font-bold mt-4 tracking-tight">Reviews</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12" id="testimonial-grid">
+                    <div class="testimonial-card p-12 rounded-xl bg-surface-container-high relative ">
+                        <span class="material-symbols-outlined text-5xl text-tertiary/20 absolute top-3 left-2"
+                            data-icon="format_quote">format_quote</span>
+                        <p class="text-xl leading-relaxed text-primary relative z-10 italic">"Very reliable, fast
+                            delivery, and solid design sense. Good quality, fair pricing. Uzair was always available and
+                            handled changes quickly. A great pick for lean B2B websites."</p>
+                        <div class="mt-10 flex items-center gap-4">
+
+                            <div>
+                                <p class="font-headline font-bold text-on-surface">Mike R.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card p-12 rounded-xl bg-surface-container-high relative">
+                        <span class="material-symbols-outlined text-5xl text-tertiary/20 absolute top-3 left-2"
+                            data-icon="format_quote">format_quote</span>
+                        <p class="text-xl leading-relaxed text-primary relative z-10 italic">"Perfect English. Amazing
+                            to work with, good at edits. Good at responses. It's very hard to find people like him, took
+                            a
+                            bit of work but we are now running."</p>
+                        <div class="mt-10 flex items-center gap-4">
+
+                            <div>
+                                <p class="font-headline font-bold text-on-surface">Jelang</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="testimonial-card p-12 rounded-xl bg-surface-container-high relative space-between flex flex-col justify-between">
+
+                        <span class="material-symbols-outlined text-5xl text-tertiary/20 absolute top-3 left-2"
+                            data-icon="format_quote">format_quote</span>
+                        <p class="text-xl leading-relaxed text-primary relative z-10 italic">"Great to work with you. If
+                            I ever need any WordPress needs. I will reach out"</p>
+                        <div class="mt-10 flex items-center gap-4">
+
+                            <div>
+                                <p class="font-headline font-bold text-on-surface">David C.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Final CTA -->
+        <section class="py-20 lg:py-[120px] px-8 text-center bg-surface-container-low overflow-hidden" id="contact">
+            <div class="max-w-3xl mx-auto space-y-10 reveal-up">
+                <h2 class="text-5xl md:text-7xl font-headline font-extrabold tracking-tighter leading-tight">
+                    Let's build something <span class="text-tertiary italic">remarkable</span>.
+                </h2>
+                <div class="pt-6 reveal-up">
+                    <a class="text-2xl md:text-4xl font-headline font-bold text-primary hover:text-tertiary transition-colors border-b-4 border-tertiary/20 pb-2 hover:border-tertiary block max-content mx-auto w-max"
+                        href="mailto:biuzairre@gmail.com">
+                        biuzairre@gmail.com
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-[#060e20] w-full py-12">
+        <div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-6">
+            <div class="text-[#4edea3] font-bold font-headline tracking-tighter text-2xl lg:text-lg ">Uzair Faisal</div>
+
+            <div class="flex gap-8 mt-4 lg:mt-0">
+                <a class="text-[#bec6e0]/60 hover:text-[#4edea3] transition-colors duration-300 font-['Inter'] text-sm tracking-widest uppercase"
+                    href="https://www.linkedin.com/in/uzair-faisal-45046b403/">LinkedIn</a>
+                <a class="text-[#bec6e0]/60 hover:text-[#4edea3] transition-colors duration-300 font-['Inter'] text-sm tracking-widest uppercase"
+                    href="https://github.com/UzairFossil">GitHub</a>
+
+            </div>
+        </div>
+    </footer>
+    <script>
+
+        window.addEventListener("DOMContentLoaded", () => {
+
+            const links = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            window.addEventListener("scroll", () => {
+                let current = "";
+
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+
+                    if (rect.top <= window.innerHeight / 2 &&
+                        rect.bottom >= window.innerHeight / 2) {
+                        current = section.id;
+                    }
+                });
+
+                links.forEach(link => {
+                    link.classList.toggle(
+                        "active",
+                        link.getAttribute("href") === `#${current}`
+                    );
+                });
+            });
+
+            // force initial state
+            window.dispatchEvent(new Event("scroll"));
+        });
+
+
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Standard reveal up for sections
+        document.querySelectorAll('.reveal-up').forEach((el) => {
+            gsap.fromTo(el,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+
+        // Hero staggered entry
+        gsap.fromTo("#hero-content > *",
+            { opacity: 0, y: 40 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power4.out",
+                delay: 0.2
+            }
+        );
+
+        // Technical Arsenal Staggered Scale-In
+        gsap.fromTo(".skill-card",
+            { opacity: 0, scale: 0.9, y: 20 },
+            {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#skills-grid",
+                    start: "top 80%",
+                }
+            }
+        );
+
+        // Project Archive Staggered Entry
+        gsap.fromTo(".archive-card",
+            { opacity: 0, scale: 0.95, y: 15 },
+            {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: "back.out(1.2)",
+                scrollTrigger: {
+                    trigger: "#archive-grid",
+                    start: "top 85%",
+                }
+            }
+        );
+
+        // Image reveal animation for artifacts
+        document.querySelectorAll('.img-container').forEach((container) => {
+            gsap.fromTo(container,
+                { clipPath: "inset(100% 0 0 0)" },
+                {
+                    clipPath: "inset(0% 0 0 0)",
+                    duration: 1.5,
+                    ease: "expo.out",
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 85%",
+                    }
+                }
+            );
+        });
+
+        // Interactive hover effects handled via CSS project-card-hover and img-container classes
+        // Applying the hover classes dynamically to maintain structural purity
+        document.querySelectorAll('.project-item').forEach(item => {
+            item.classList.add('project-card-hover');
+        });
+
+        // Smooth testimonial reveal
+        gsap.fromTo(".testimonial-card",
+            { opacity: 0, x: (i) => i === 0 ? -40 : 40 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1.2,
+                stagger: 0.3,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: "#testimonial-grid",
+                    start: "top 75%",
+                }
+            }
+        );
+
+        // Refresh ScrollTrigger on resize
+        window.addEventListener('resize', () => {
+            ScrollTrigger.refresh();
+        });
+    </script>
+</body>
+
+</html>
